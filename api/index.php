@@ -6,6 +6,12 @@ use Illuminate\Support\Facades\Artisan;
 
 define('LARAVEL_START', microtime(true));
 
+// Ensure HTTPS detection behind Vercel edge reverse proxy
+if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
+    $_SERVER['HTTPS'] = 'on';
+    $_SERVER['SERVER_PORT'] = 443;
+}
+
 // Setup writable storage directory in temporary directory
 $tempDir = rtrim(sys_get_temp_dir(), '/\\');
 $storagePath = $tempDir.'/storage';
