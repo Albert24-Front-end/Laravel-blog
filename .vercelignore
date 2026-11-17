@@ -5,3 +5,4 @@
 .env
 .env.backup
 .env.local
+public/hot
